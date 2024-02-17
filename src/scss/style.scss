@@ -1,9 +1,26 @@
+// VARIABLES
 $primary-color: #787878;
 $secondary-color: #324360;
 $footer-color:#989898;
-
 $primary-font: 'Josefin Sans', sans-serif;
 $body-font: 'Quando';
+
+// MIXINS
+@mixin header{
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-family: $primary-font;
+    font-weight: 400;
+    line-height: 1.3em;
+    word-wrap: break-word;
+    color: #111111;
+}
+
+@mixin postarticle{
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 body {
     font-family: $body-font;
@@ -23,24 +40,21 @@ a {
     text-decoration: none;
     color: #111111;
     transition: .20s;
+
+    // NESTING
+    &:hover {
+    color: #999999;}
 }
-a:hover {
-    color: #999999;
-}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    margin-top: 25px;
-    margin-bottom: 20px;
-    font-family: $primary-font;
-    font-weight: 400;
-    line-height: 1.3em;
-    word-wrap: break-word;
-    color: #111111;
+    @include header;
 }
+
 h1 {
     font-size: 37px;
 }
@@ -70,9 +84,10 @@ h6 {
 /* header and main nav */
 header {
     font-family: $primary-font;
-}
-header nav ul {
-    display: none;
+
+    // NESTING
+    nav ul {
+    display: none;}
 }
 
 .top-logo {
@@ -84,9 +99,7 @@ header nav ul {
 
 /* posts */
 article {
-    margin-bottom: 50px;
-    display: flex;
-    flex-wrap: wrap;
+    @include postarticle;
 }
 .image-part {
     margin-bottom: 10px;
@@ -104,9 +117,10 @@ article {
     margin-bottom: 15px;
     line-height: 1.3em;
     transition: all .3s ease;
-}
-.post-title a:hover {
-    color: #35c4ce;
+
+    // NESTING
+    &:hover {
+    color: #35c4ce;}
 }
 
 
@@ -118,11 +132,13 @@ footer {
     background: #eaf2ff;
     color: $footer-color;
 }
+
 #footer a {
     color: $footer-color;
-}
-#footer a:hover {
-    color: #111111;
+
+    // NESTING
+    &:hover {
+    color: #111111;}
 }
 .footer-logo {
     width: 200px;
@@ -162,33 +178,39 @@ footer {
         justify-content: center;
         align-items: center;
         height: 60px;
+
+        // NESTING
+
+        ul {
+            display: flex;
+        }
+        li {
+            margin: 0 15px;
+            position: relative;
+            line-height: 24px;
+        }
+        a {
+            font-family: $primary-font;
+            color: $secondary-color;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 900;
+        
+        // NESTING
+            &:hover {
+                color: #35c4ce;}
+        }
+
+        li.menu-item-has-children > a::after {
+            margin-left: 7px;
+            font-family: 'FontAwesome';
+            font-size: 13px;
+            color: #324360;
+            content: '\f078';
+        }
     }
-    header nav ul {
-        display: flex;
-    }
-    header nav li {
-        margin: 0 15px;
-        position: relative;
-        line-height: 24px;
-    }
-    header nav a {
-        font-family: $primary-font;
-        color: $secondary-color;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 900;
-    }
-    header nav a:hover {
-        color: #35c4ce;
-    }
-    header nav li.menu-item-has-children > a::after {
-        margin-left: 7px;
-        font-family: 'FontAwesome';
-        font-size: 13px;
-        color: #324360;
-        content: '\f078';
-    }
+
     .current-menu-item a {
         border-bottom: 2px solid #324360;
     }
@@ -247,8 +269,6 @@ footer {
         flex: 1;
         padding-left: 50px;
     }
-
-
 
     /* footer */
     .footer-social-links a {
